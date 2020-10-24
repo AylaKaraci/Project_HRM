@@ -8,8 +8,10 @@ namespace Project_HRM.DATA.Contracts
     {
         IEmployeeLeaveAllocationRepository employeeAllocationRepository { get; }
         IEmployeeLeaveRequestRepository employeeLeaveRequestRepository { get; }
-        IEmployeeLeaveTypeRepository employeeTypeRepository { get; }
-       
+        IEmployeeLeaveTypeRepository employeeLeaveTypeRepository { get; }
+        IEmployeeRepository employeeRepository { get; }
+
+
 
         void Save();
     }

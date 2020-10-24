@@ -8,4 +8,9 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Project_HRM.Common\Project_HRM.Common.csproj" />
+    <ProjectReference Include="..\Project_HRM.DATA\Project_HRM.DATA.csproj" />
+  </ItemGroup>
+
 </Project>

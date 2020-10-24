@@ -16,8 +16,10 @@ namespace Project_HRM.DATA.Implementation
             _ctx = ctx;
             employeeAllocationRepository = new EmployeeLeaveAllocationRepository(_ctx);
             employeeLeaveRequestRepository = new EmployeeLeaveRequestRepository(_ctx);
-            employeeTypeRepository = new EmployeeLeaveTypeRepository(_ctx);
-      
+            employeeLeaveTypeRepository = new EmployeeLeaveTypeRepository(_ctx);
+            employeeRepository = new EmployeeRepository(_ctx);
+
+
         }
         #endregion
 
@@ -25,7 +27,9 @@ namespace Project_HRM.DATA.Implementation
         public IEmployeeLeaveAllocationRepository employeeAllocationRepository { get; private set; } //dışarıdan set edilmesin.Ben yukarıda set ettim.
         //TODO: diğer interfaceleri de yap.
         public IEmployeeLeaveRequestRepository employeeLeaveRequestRepository { get; private set; }
-        public IEmployeeLeaveTypeRepository employeeTypeRepository { get; private set; }
+        public IEmployeeLeaveTypeRepository employeeLeaveTypeRepository { get; private set; }
+
+        public IEmployeeRepository employeeRepository { get; private set; }
 
 
 
