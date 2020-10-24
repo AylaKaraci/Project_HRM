@@ -39,6 +39,9 @@ namespace Project_HRM.UI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("IdentityConnection")));
 
+            //services.AddSingleton<IEmailSender, EmailSender>();
+            //services.Configure<EmailOptions>(Configuration);
+
             services.AddScoped<IEmployeeLeaveTypeBusinessEngine, EmployeeLeaveTypeBusinessEngine>();
             services.AddScoped<IEmployeeLeaveRequestBusinessEngine, EmployeeLeaveRequestBusinessEngine>();
             services.AddScoped<IEmployeeLeaveAssignBusinessEngine, EmployeeLeaveAssignBusinessEngine>();

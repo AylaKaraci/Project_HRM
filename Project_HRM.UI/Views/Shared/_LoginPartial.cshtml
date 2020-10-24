@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@using Project_HRM.Common.SessionOperations
+
+
+
+@inject SignInManager<Project_HRM.DATA.DbModels.Employee> SignInManager
+@inject UserManager<Project_HRM.DATA.DbModels.Employee> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index","Home", new { area = "" })">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@await Component.InvokeAsync("UserName")</a>               
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link text-white">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+        @*<li><a asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>*@
+    </ul>
+}

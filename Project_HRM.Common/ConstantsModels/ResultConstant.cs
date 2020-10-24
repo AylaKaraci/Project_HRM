@@ -17,7 +17,7 @@ namespace Project_HRM.Common.ConstantsModels
         public const string Admin_Role = "Administrator";
         public const string Employee_Role = "Employee";
 
-        public const string Admin_Email = "ayla@gmail.com";
+        public const string Admin_Email = "ayla.karaci@icloud.com";
         public const string Admin_Password = "Admin/123";
 
         public const string LoginUserInfo = "Giriş Yapan Kullanıcı Bilgisi";
