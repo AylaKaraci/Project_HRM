@@ -1,32 +1,39 @@
-﻿@model IEnumerable<Project_HRM.Common.VModels.EmployeeLeaveRequestVM>
+﻿@model IEnumerable<Project_HRM.Common.VModels.EmployeeVM>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page-header">
-    <h2>
+    <h3>
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            İzin Talep Listesi
+            Çalışan Listesi
         </small>
-    </h2>
-</div><!-- /.page-header -->
+    </h3>
+</div>
 
-<br />
-<div class="col-6 text-left text-white" style="margin:12px;">
-    <a class="btn btn-success" asp-controller="EmployeeLeaveRequest" asp-action="Create">Talep Ekle</a>
+<div class="col-6 text-left text-white" style="margin-left:15px;">
+    <a class="btn btn-danger" asp-controller="Employee" asp-action="Create">Çalışan Ekle</a>
 </div>
 <br />
-<div class="row">
+<div class="row" style="margin-left:5px;">
     <div class="col-xs-12">
-        <table id="simple-table" class="table  table-bordered table-hover" style="margin:12px;">
+        <table id="simple-table" class="table  table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Başlangıç Tarihi</th>
-                    <th>Bitiş Tarihi</th>
-                    <th>Sebep</th>
-                    <th>Durum</th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>TcNo</th>
+                    <th>Adres</th>
+                    <th>Cinsiyet</th>
+                    <th>Photo</th>
+                    <th>Dokumanlar</th>
+                    <th>Medeni Durum</th>
+                    <th>Doğum Tarihi</th>
+                    <th>İşe Başlangıç Tarihi</th>
+                    <th>Email</th>
+                    <th>CepNo</th>
                     <th>İşlemler</th>
                 </tr>
             </thead>
@@ -34,24 +41,22 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.StartDate.ToShortDateString()</td>
-                        <td> @item.EndDate.ToShortDateString()</td>
-                        <td>@item.LeaveTypeText</td>
-                        @if (item.ApprovedStatus == EnumEmployeeLeaveRequestStatus.Approved)
-                        {
-                            <td style="color:green">@item.ApprovedText</td>
-                        }
-                        else if (item.ApprovedStatus == EnumEmployeeLeaveRequestStatus.Send_Approved)
-                        {
-                            <td style="color:blue">@item.ApprovedText</td>
-                        }
-                        else
-                        {
-                            <td style="color:red">@item.ApprovedText</td>
-                        }                     
+                        <td> @item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.TcNo</td>
+                        <td>@item.Address</td>
+                        <td>@item.Gender</td>
+                        <td>@item.PhotoPath</td>
+                        <td>@item.Document</td>
+                        <td>@item.MaritalStatus</td>
+                        <td>@item.DateOfBirth.ToString()</td>
+                        <td>@item.DateOfWork.ToString()</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
                         <td>
                             <div class="hidden-sm hidden-xs btn-group">
-                                <a class="btn btn-xs btn-info" asp-controller="EmployeeLeaveRequest" asp-action="Edit" asp-route-id="@item.Id">
+                                <a class="btn btn-xs btn-info" asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id">
+
                                     <i class="ace-icon fa fa-pencil bigger-120"></i>
                                 </a>
                                 <a class="btn btn-xs btn-danger" id="btnRemove" data-id="@item.Id">
@@ -61,7 +66,8 @@
                                     <i class="ace-icon fa fa-flag bigger-120"></i>
                                 </button>
                             </div>
-                        </td>                      
+                        </td>
+
                     </tr>
                 }
             </tbody>
@@ -87,11 +93,11 @@
                     if (willDelete) {
                         $.ajax({
                             type: "DELETE",
-                            url: "/EmployeeLeaveRequest/Delete/" + id,
+                            url: "/Employees/Delete/" + id,
                             success: function (data) {
                                 if (data.success) {
                                     toastr.success(data.message);
-                                    location.reload();//sayfayı da yenile
+                                    location.reload();
                                 } else {
                                     toastr.error(data.message);
                                 }
@@ -105,4 +111,5 @@
     </script>
 
 }
+
 

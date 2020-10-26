@@ -26,12 +26,12 @@ namespace Project_HRM.UI.Controllers
         {
             _employeeLeaveRequestBusinessEngine = employeeLeaveRequestBusinessEngine;
             _employeeLeaveTypeBusinessEngine = employeeLeaveTypeBusinessEngine;
-        } 
+        }
         #endregion
 
+        #region Actions
         public IActionResult Index()
         {
-            //SerializeObject DeserializeObject çevrildi.
             var user = JsonConvert.DeserializeObject<SessionContext>(HttpContext.Session.GetString(ResultConstant.LoginUserInfo));
 
             var requestModel = _employeeLeaveRequestBusinessEngine.GetAllLeaveRequestByUserId(user.LoginId);
@@ -53,7 +53,7 @@ namespace Project_HRM.UI.Controllers
         public IActionResult Create(EmployeeLeaveRequestVM model, int? id)
         {
             var user = JsonConvert.DeserializeObject<SessionContext>(HttpContext.Session.GetString(ResultConstant.LoginUserInfo));
-            #region CreateOrEditExample
+
             if (id > 0)
             {
                 var data = _employeeLeaveRequestBusinessEngine.EditEmployeeLeaveRequest(model, user);
@@ -66,7 +66,7 @@ namespace Project_HRM.UI.Controllers
                     return RedirectToAction("Index");
                 return View(model);
             }
-            #endregion
+
         }
 
         public ActionResult Edit(int? id)
@@ -103,6 +103,7 @@ namespace Project_HRM.UI.Controllers
             }
             else
                 return View();
-        }
+        } 
+        #endregion
     }
 }

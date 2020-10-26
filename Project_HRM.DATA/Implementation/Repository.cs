@@ -34,6 +34,19 @@ namespace Project_HRM.DATA.Implementation
             return dbSet.Find(id);
         }
 
+        public T Get(string id)
+        {
+            return dbSet.Find(id);
+        }
+
+        //public T GetById(Guid id)
+        //{
+        //    return dbSet.Find(id);
+        //}
+
+
+
+
         public IQueryable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -77,7 +90,9 @@ namespace Project_HRM.DATA.Implementation
         public void Update(T entity)
         {
             dbSet.Update(entity);
-        } 
+        }
+
+    
         #endregion
     }
 }
