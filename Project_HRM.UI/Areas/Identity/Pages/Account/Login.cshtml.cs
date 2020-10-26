@@ -103,7 +103,8 @@ namespace Project_HRM.UI.Areas.Identity.Pages.Account
                         LoginId = user.Id
                     };
 
-                    HttpContext.Session.SetString(ResultConstant.LoginUserInfo, JsonConvert.SerializeObject(userInfo));
+                    //User bilgisini set et.
+                    HttpContext.Session.SetString(ResultConstant.LoginUserInfo, JsonConvert.SerializeObject(userInfo));//stringe çevir.
 
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);

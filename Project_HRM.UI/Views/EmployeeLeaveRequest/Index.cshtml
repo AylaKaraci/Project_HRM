@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Project_HRM.Common.VModels.EmployeeLeaveRequestVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            İzin Talep Listesi
+        </small>
+    </h2>
+</div><!-- /.page-header -->
+
+<br />
+<div class="col-6 text-left text-white" style="margin:12px;">
+    <a class="btn btn-success" asp-controller="EmployeeLeaveRequest" asp-action="Create">Talep Ekle</a>
+</div>
+<br />
+<div class="row">
+    <div class="col-xs-12">
+        <table id="simple-table" class="table  table-bordered table-hover" style="margin:12px;">
+            <thead>
+                <tr>
+                    <th>Başlangıç Tarihi</th>
+                    <th>Bitiş Tarihi</th>
+                    <th>Sebep</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.StartDate.ToShortDateString()</td>
+                        <td> @item.EndDate.ToShortDateString()</td>
+                        <td>@item.LeaveTypeText</td>
+                        @if (item.ApprovedStatus == EnumEmployeeLeaveRequestStatus.Approved)
+                        {
+                            <td style="color:green">@item.ApprovedText</td>
+                        }
+                        else if (item.ApprovedStatus == EnumEmployeeLeaveRequestStatus.Send_Approved)
+                        {
+                            <td style="color:blue">@item.ApprovedText</td>
+                        }
+                        else
+                        {
+                            <td style="color:red">@item.ApprovedText</td>
+                        }                     
+                        <td>
+                            <div class="hidden-sm hidden-xs btn-group">
+                                <a class="btn btn-xs btn-info" asp-controller="EmployeeLeaveRequest" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </a>
+                                <a class="btn btn-xs btn-danger" id="btnRemove" data-id="@item.Id">
+                                    <i class="ace-icon fa fa-trash bigger-120"></i>
+                                </a>
+                                <button class="btn btn-xs btn-warning">
+                                    <i class="ace-icon fa fa-flag bigger-120"></i>
+                                </button>
+                            </div>
+                        </td>                      
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#btnRemove").on("click", function () {
+                var id = $("#btnRemove").data("id");
+
+                swal({
+                    title: 'Silmek İstediğinize Emin Misiniz?',
+                    text: 'Silinen Data Geri Alınamaz!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/EmployeeLeaveRequest/Delete/" + id,
+                            success: function (data) {
+                                if (data.success) {
+                                    toastr.success(data.message);
+                                    location.reload();
+                                } else {
+                                    toastr.error(data.message);
+                                }
+                            }
+
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+}
+
