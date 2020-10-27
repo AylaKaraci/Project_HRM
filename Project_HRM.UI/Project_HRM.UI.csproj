@@ -28,6 +28,10 @@
     <ProjectReference Include="..\Project_HRM.DATA\Project_HRM.DATA.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\CustomImages\" />
+  </ItemGroup>
+
 
 
 </Project>
