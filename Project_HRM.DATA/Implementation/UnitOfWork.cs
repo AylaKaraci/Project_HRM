@@ -18,7 +18,7 @@ namespace Project_HRM.DATA.Implementation
             employeeLeaveRequestRepository = new EmployeeLeaveRequestRepository(_ctx);
             employeeLeaveTypeRepository = new EmployeeLeaveTypeRepository(_ctx);
             employeeRepository = new EmployeeRepository(_ctx);
-
+            workOrderRepository = new WorkOrderRepository(_ctx);
 
         }
         #endregion
@@ -30,7 +30,7 @@ namespace Project_HRM.DATA.Implementation
         public IEmployeeLeaveTypeRepository employeeLeaveTypeRepository { get; private set; }
 
         public IEmployeeRepository employeeRepository { get; private set; }
-
+        public IWorkOrderRepository workOrderRepository { get; private set; }
 
 
         #endregion

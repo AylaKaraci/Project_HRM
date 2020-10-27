@@ -10,7 +10,7 @@ namespace Project_HRM.DATA.Contracts
         IEmployeeLeaveRequestRepository employeeLeaveRequestRepository { get; }
         IEmployeeLeaveTypeRepository employeeLeaveTypeRepository { get; }
         IEmployeeRepository employeeRepository { get; }
-
+        IWorkOrderRepository workOrderRepository { get; }
 
 
         void Save();

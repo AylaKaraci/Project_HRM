@@ -18,5 +18,7 @@ namespace Project_HRM.DATA.DataContext
         public DbSet<EmployeeLeaveAllocation> EmployeeLeaveAllocations { get; set; }
         public DbSet<EmployeeLeaveRequest> EmployeeLeaveRequests { get; set; }
         public DbSet<EmployeeLeaveType> EmployeeLeaveTypes { get; set; }
+        public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<WorkOrderStatus> WorkOrderStatus { get; set; }
     }
 }

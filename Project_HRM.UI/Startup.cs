@@ -46,6 +46,7 @@ namespace Project_HRM.UI
             services.AddScoped<IEmployeeLeaveRequestBusinessEngine, EmployeeLeaveRequestBusinessEngine>();
             services.AddScoped<IEmployeeLeaveAssignBusinessEngine, EmployeeLeaveAssignBusinessEngine>();
             services.AddScoped<IEmployeeBusinessEngine, EmployeeBusinessEngine>();
+            services.AddScoped<IWorkOrderBusinessEngine, WorkOrderBusinessEngine>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Maps));
