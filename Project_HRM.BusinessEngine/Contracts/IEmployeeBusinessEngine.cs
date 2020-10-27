@@ -13,5 +13,6 @@ namespace Project_HRM.BusinessEngine.Contracts
         Result<EmployeeVM> CreateNewEmployee(EmployeeVM model);      
         Result<EmployeeVM> EditEmployeeType(EmployeeVM model);
         Result<EmployeeVM> GetAllEditEmployee(string id);
+        Result<List<EmployeeVM>> GetAllEmployee();//workorder edit işlemi için
     }
 }

@@ -68,6 +68,45 @@ namespace Project_HRM.UI.Controllers
                 return RedirectToAction("Index");
             return View();
         }
+
+        public IActionResult Edit(int id)
+        {
+            ViewBag.EmployeeList = _employeeBusinessEngine.GetAllEmployee().Data;
+            var data = _workOrderBusinessEngine.GetWorkOrder(id).Data;
+            return View(data);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult Edit(WorkOrderVM editModel)
+        {
+            var data = _workOrderBusinessEngine.EditWorkOrder(editModel);
+            if (data.IsSuccess)
+                return RedirectToAction("Index");
+            return View();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return Json(new { success = false, message = "Silmek için Kayıt Seçiniz" });
+
+            var data = _workOrderBusinessEngine.RemoveWorkOrder(id);
+            if (data.IsSuccess)
+                return Json(new { success = data.IsSuccess, message = data.Message });
+            else
+                return Json(new { success = data.IsSuccess, message = data.Message });
+        }
+
+        public ActionResult GetWorkOrderByEmployeeId(string Id)
+        {
+            var data = _workOrderBusinessEngine.GetWorkOrderByEmployeeId(Id);
+            if (data.IsSuccess)
+                return Json(new { isSuccess = data.IsSuccess, message = data.Message, data = data.Data });
+            return RedirectToAction("Index", new { employeeId = Id });
+        }
+
         #endregion
     }
 }

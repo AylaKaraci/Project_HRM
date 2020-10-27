@@ -163,7 +163,32 @@ namespace Project_HRM.BusinessEngine.Implementation
             //    return new Result<EmployeeVM>(false, "Parametre Olarak Geçilen Data Boş Olamaz!");
         }
 
-       
+        public Result<List<EmployeeVM>> GetAllEmployee() //workorder edit işlemi için
+        {
+            var data = _unitOfWork.employeeRepository.GetAll();
+            if (data != null)
+            {
+                List<EmployeeVM> listData = new List<EmployeeVM>();
+                foreach (var item in data)
+                {
+                    listData.Add(new EmployeeVM
+                    {
+                        DateOfBirth = item.DateOfBirth,
+                        Email = item.Email,
+                        FirstName = item.FirstName,
+                        Id = item.Id,
+                        LastName = item.LastName,
+                        PhoneNumber = item.PhoneNumber,
+                        UserName = item.UserName
+                    });
+                }
+                return new Result<List<EmployeeVM>>(true, ResultConstant.RecordFound, listData);
+
+            }
+            return new Result<List<EmployeeVM>>(false, ResultConstant.RecordNotFound);
+        }
+
+
 
 
 
