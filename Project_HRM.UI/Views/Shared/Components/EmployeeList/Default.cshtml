@@ -1,0 +1,5 @@
+﻿@model IEnumerable<Project_HRM.Common.VModels.EmployeeVM>
+
+
+@Html.DropDownList("AssignEmployeeId", new SelectList(ViewBag.EmployeeList, "Id", "UserName", "Seçiniz"),
+        new { @class = "selectpicker col-sm-3", id = "AssignEmployeeId" })

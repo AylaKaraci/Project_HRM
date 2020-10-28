@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Project_HRM.UI.ViewComponents
 {
-    public class AssignWorkOrderViewComponent : ViewComponent
+    public class ClosedWorkOrderViewComponent : ViewComponent
     {
         #region Variables
         private readonly IUnitOfWork _uow;
@@ -20,7 +20,7 @@ namespace Project_HRM.UI.ViewComponents
         #endregion
 
         #region Constructor
-        public AssignWorkOrderViewComponent(IUnitOfWork uow, IMapper mapper)
+        public ClosedWorkOrderViewComponent(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
             _mapper = mapper;
@@ -29,19 +29,20 @@ namespace Project_HRM.UI.ViewComponents
 
         #region CustomMethod
 
-       
-        // Employee Id Ve Status ıle Is Emrı Getırme(Atanmıs)
-    
+        /// <summary>
+        /// Employee Id Ve Status ıle Is Emrı Getırme(Atanmıs)
+        /// </summary>
+        /// <returns></returns>
         public async Task<IViewComponentResult> InvokeAsync(int pageNumber = 1)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             var userFromDb = _uow.employeeRepository.GetFirstOrDefault(u => u.Id == claims.Value);
             var employeeId = userFromDb.Id;
-            var workOrderStatus = (int)EnumWorkOrderStatus.Assigned;
-
+            var workOrderStatus = (int)EnumWorkOrderStatus.Closed;
             var data = _uow.workOrderRepository
                             .GetAll(u => u.AssignEmployeeId == employeeId && u.WorkOrderStatus == workOrderStatus).ToList();
+
 
             if (data != null)
             {
@@ -63,7 +64,6 @@ namespace Project_HRM.UI.ViewComponents
                 var model = PaginatedList<WorkOrderVM>.CreateAsync(returnData, pageNumber, 5);
                 return View(model);
             }
-            //var mappingData = _mapper.Map<List<WorkOrder>, List<WorkOrderVM>>(data);
             return View();
         }
         #endregion
