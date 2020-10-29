@@ -126,7 +126,7 @@ namespace Project_HRM.BusinessEngine.Implementation
                     data.MaritalStatus = model.MaritalStatus;
                     data.DateOfWork = model.DateOfWork;
                     data.Address = model.Address;
-                    data.PhotoPath = model.PhotoPath;
+                  
 
 
                     _unitOfWork.employeeRepository.Update(data);
