@@ -70,7 +70,7 @@ namespace Project_HRM.BusinessEngine.Implementation
                     WorkOrder wOrder = new WorkOrder();
                     wOrder.CreateDate = DateTime.Now;
                     wOrder.WorkOrderDescription = model.WorkOrderDescription;
-                    wOrder.WorkOrderNumber = Guid.NewGuid().ToString();//DateTime.Now.ToString();
+                    wOrder.WorkOrderNumber = DateTime.Now.ToString();
                     wOrder.WorkOrderPoint = model.WorkOrderPoint;
                     wOrder.AssignEmployeeId = employeeId;
                     wOrder.WorkOrderStatus = String.IsNullOrWhiteSpace(employeeId) == true ? (int)EnumWorkOrderStatus.WorkOrder_Created : (int)EnumWorkOrderStatus.Assigned;
@@ -162,7 +162,7 @@ namespace Project_HRM.BusinessEngine.Implementation
             if (data != null)
             {
                 List<WorkOrderVM> returnData = new List<WorkOrderVM>();
-                //var mappingData = _mapper.Map<List<WorkOrder>, List<WorkOrderVM>>(data);
+
                 foreach (var item in data)
                 {
                     returnData.Add(new WorkOrderVM()
@@ -200,8 +200,8 @@ namespace Project_HRM.BusinessEngine.Implementation
             var data = getWorkOrderList.GroupBy(x => x.AssignEmployeeId).ToList();
             //Kullanıcı - IsEmrı Toplam puan
             Dictionary<string, double> employeeValue = new Dictionary<string, double>();
-            //ASsignEmployee
-            foreach (var emp in data)
+            //buradaki key değeri : ASsignEmployee yani string
+            foreach (var emp in data) //AssignEmployee'lar içinde dön
             {
                 double employeePoint = 0;
                 foreach (var subItemWorkOrders in emp)//atanmış olan employee un iş emirleri içinde dön
@@ -213,8 +213,6 @@ namespace Project_HRM.BusinessEngine.Implementation
             var assignValue = employeeValue.OrderBy(x => x.Value).First().Key;
             return assignValue;
         }
-
-       
 
         #endregion
     }

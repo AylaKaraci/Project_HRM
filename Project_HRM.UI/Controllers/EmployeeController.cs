@@ -97,5 +97,17 @@ namespace Project_HRM.UI.Controllers
                 return View(model);
            
         }
+
+        [HttpGet]
+        public ActionResult Detail(string id)
+        {
+            if (id == null)
+                return View();
+
+            var data = _employeeBusinessEngine.GetAllEditEmployee(id);
+            if (data.IsSuccess)
+                return View(data.Data);
+            return View();
+        }
     }
 }

@@ -13,66 +13,85 @@
     </h3>
 </div>
 
-<div class="col-6 text-left text-white" style="margin-left:15px;">
+@*<div class="col-6 text-left text-white" style="margin-left:15px;">
     <a class="btn btn-danger" asp-controller="Employee" asp-action="Create">Çalışan Ekle</a>
-</div>
+</div>*@
 <br />
-<div class="row" style="margin-left:5px;">
-    <div class="col-xs-12">
-        <table id="simple-table" class="table  table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Adı</th>
-                    <th>Soyadı</th>
-                    <th>TcNo</th>
-                    <th>Adres</th>
-                    <th>Cinsiyet</th>
-                    <th>Photo</th>
-                    <th>Dokumanlar</th>
-                    <th>Medeni Durum</th>
-                    <th>Doğum Tarihi</th>
-                    <th>İşe Başlangıç Tarihi</th>
-                    <th>Email</th>
-                    <th>CepNo</th>
-                    <th>İşlemler</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+<div class="container" style="margin-left:100px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="simple-table" class="table  table-bordered table-hover">
+                <thead>
                     <tr>
-                        <td> @item.FirstName</td>
-                        <td>@item.LastName</td>
-                        <td>@item.TcNo</td>
-                        <td>@item.Address</td>
-                        <td>@item.Gender</td>
-                        <td>@item.PhotoPath</td>
-                        <td>@item.Document</td>
-                        <td>@item.MaritalStatus</td>
-                        <td>@item.DateOfBirth.ToString()</td>
-                        <td>@item.DateOfWork.ToString()</td>
-                        <td>@item.Email</td>
-                        <td>@item.PhoneNumber</td>
-                        <td>
-                            <div class="hidden-sm hidden-xs btn-group">
-                                <a class="btn btn-xs btn-info" asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id">
-
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                </a>
-                                <a class="btn btn-xs btn-danger" id="btnRemove" data-id="@item.Id">
-                                    <i class="ace-icon fa fa-trash bigger-120"></i>
-                                </a>
-                                <button class="btn btn-xs btn-warning">
-                                    <i class="ace-icon fa fa-flag bigger-120"></i>
-                                </button>
-                            </div>
-                        </td>
-
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Departmanı</th>
+                        <th>Görevi</th>
+                        @*<th>TcNo</th>
+                        <th>Adres</th>
+                        <th>Cinsiyet</th>
+                        <th>Photo</th>
+                        <th>Dokumanlar</th>
+                        <th>Medeni Durum</th>
+                        <th>Doğum Tarihi</th>
+                        <th>İşe Başlangıç Tarihi</th>
+                        <th>Email</th>
+                        <th>CepNo</th>*@
+                        <th>İşlemler</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div><!-- /.span -->
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td> @item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td></td>
+                            <td></td>
+                            @*<td>@item.TcNo</td>
+                            <td>@item.Address</td>
+                            <td>@item.Gender</td>
+                            <td>@item.PhotoPath</td>
+                            <td>@item.Document</td>*@
+                            @*<td>@item.MaritalStatus</td>*@
+                            @*<td>@item.DateOfBirth.ToString()</td>
+                            <td>@item.DateOfWork.ToString()</td>
+                            <td>@item.Email</td>
+                            <td>@item.PhoneNumber</td>*@
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <a class="btn btn-xs btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id">
+
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" id="btnRemove" data-id="@item.Id">
+                                        <i class="ace-icon fa fa-trash bigger-120"></i>
+                                    </a>
+
+                                    <a class="btn btn-xs btn-light" asp-controller="Employee" asp-action="Detail" asp-route-id="@item.Id">
+
+                                        <i class="blue ace-icon fa fa-user bigger-110"></i>
+                                        Profile
+
+                                        @*<i class="ace-icon fa fa-user bigger-120"></i>*@
+                                    </a>
+
+
+
+
+
+                                    @*<button class="btn btn-xs btn-warning">
+                                        <i class="ace-icon fa fa-flag bigger-120"></i>
+                                    </button>*@
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- /.span -->
+    </div>
 </div>
 
 @section Scripts{
@@ -109,7 +128,4 @@
             });
         });
     </script>
-
 }
-
-

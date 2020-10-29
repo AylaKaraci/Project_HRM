@@ -29,10 +29,6 @@ namespace Project_HRM.UI.ViewComponents
 
         #region CustomMethod
 
-        /// <summary>
-        /// Employee Id Ve Status ıle Is Emrı Getırme(Atanmıs)
-        /// </summary>
-        /// <returns></returns>
         public async Task<IViewComponentResult> InvokeAsync(int pageNumber = 1)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;

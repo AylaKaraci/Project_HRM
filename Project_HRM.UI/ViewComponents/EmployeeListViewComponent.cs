@@ -25,12 +25,7 @@ namespace Project_HRM.UI.ViewComponents
         }
         #endregion
 
-        #region CustomMethod
-
-        /// <summary>
-        /// Employee Id Ve Status ıle Is Emrı Getırme(Atanmıs)
-        /// </summary>
-        /// <returns></returns>
+        #region CustomMethods
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var data = _uow.employeeRepository.GetAll(e => e.IsActive == true && e.IsAdmin != true).ToList();

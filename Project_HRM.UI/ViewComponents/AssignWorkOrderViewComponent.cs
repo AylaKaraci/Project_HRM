@@ -63,7 +63,6 @@ namespace Project_HRM.UI.ViewComponents
                 var model = PaginatedList<WorkOrderVM>.CreateAsync(returnData, pageNumber, 5);
                 return View(model);
             }
-            //var mappingData = _mapper.Map<List<WorkOrder>, List<WorkOrderVM>>(data);
             return View();
         }
         #endregion

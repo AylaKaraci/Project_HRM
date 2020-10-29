@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<Project_HRM.Common.VModels.EmployeeVM>
 
+@*<select class="selectpicker" id="employeeList" style="font-weight:bold">
+        @foreach (var item in Model)
+        {
+            <option id="employeeSubItem" data-id="@item.Id">@item.FirstName @item.LastName</option>
+        }
+    </select>*@
+
 
 @Html.DropDownList("AssignEmployeeId", new SelectList(ViewBag.EmployeeList, "Id", "UserName", "Seçiniz"),
-        new { @class = "selectpicker col-sm-3", id = "AssignEmployeeId" })
+        new { @class="selectpicker col-sm-3",id="AssignEmployeeId" })

@@ -102,8 +102,9 @@ namespace Project_HRM.UI.Controllers
         public ActionResult GetWorkOrderByEmployeeId(string Id)
         {
             var data = _workOrderBusinessEngine.GetWorkOrderByEmployeeId(Id);
-            if (data.IsSuccess)
+            if (data.IsSuccess)          
                 return Json(new { isSuccess = data.IsSuccess, message = data.Message, data = data.Data });
+                        
             return RedirectToAction("Index", new { employeeId = Id });
         }
 
