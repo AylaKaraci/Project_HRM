@@ -1,4 +1,5 @@
-﻿using Project_HRM.DATA.DbModels;
+﻿using Project_HRM.Common.ConstantsModels;
+using Project_HRM.DATA.DbModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,7 @@ namespace Project_HRM.Common.VModels
 {
     public class EmployeeVM
     {
+        #region properties
         public string Id { get; set; }
         [Display(Name = "Kullanıcı Adı")]
         public string UserName { get; set; }
@@ -25,11 +27,14 @@ namespace Project_HRM.Common.VModels
         public string TaxId { get; set; }
         public string MaritalStatus { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public DateTime? DateOfWork { get; set; }//işe giriş tarihi
+        public DateTime? DateOfWork { get; set; }//işe giriş tarihi 
+        #endregion
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }
 
-    
-     
+        //public Status Status { get; set; }
+        //public Status StatusText { get; set; }
+
+
     }
 }

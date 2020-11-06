@@ -28,10 +28,10 @@ namespace Project_HRM.BusinessEngine.Implementation
         #endregion
 
         #region Methods
-      
+
         public Result<List<EmployeeVM>> GetAllNewEmployees()
         {
-            var data = _unitOfWork.employeeRepository.GetAll();
+            var data = _unitOfWork.employeeRepository.GetAll(e=> e.IsActive == true).ToList();
 
             if (data != null)
             {
@@ -41,7 +41,7 @@ namespace Project_HRM.BusinessEngine.Implementation
                     returnData.Add(new EmployeeVM()
                     {
                         Id = item.Id,
-                 
+
                         FirstName = item.FirstName,
                         LastName = item.LastName,
                         TcNo = item.TcNo,
@@ -52,7 +52,8 @@ namespace Project_HRM.BusinessEngine.Implementation
                         PhoneNumber = item.PhoneNumber,
                         DateOfBirth = item.DateOfBirth,
                         DateOfWork = item.DateOfWork,
-                        Email = item.Email
+                        Email = item.Email,
+                        IsActive = item.IsActive
                     });
                 }
                 return new Result<List<EmployeeVM>>(true, ResultConstant.RecordFound, returnData.OrderByDescending(x => x.FirstName).ToList());
@@ -126,7 +127,7 @@ namespace Project_HRM.BusinessEngine.Implementation
                     data.MaritalStatus = model.MaritalStatus;
                     data.DateOfWork = model.DateOfWork;
                     data.Address = model.Address;
-                  
+
 
 
                     _unitOfWork.employeeRepository.Update(data);
@@ -186,6 +187,47 @@ namespace Project_HRM.BusinessEngine.Implementation
 
             }
             return new Result<List<EmployeeVM>>(false, ResultConstant.RecordNotFound);
+        }
+
+
+
+
+
+
+
+
+
+        public Result<List<WorkOrderVM>> GetWorkOrderByEmployeeId(string employeeId, EnumWorkOrderStatus workOrderStatus)
+        {
+            var data = _unitOfWork.workOrderRepository.
+                          GetAll(u => u.AssignEmployeeId == employeeId
+                                  && u.WorkOrderStatus == (int)workOrderStatus).ToList();
+            if (data != null)
+            {
+                var workOrderVm = _mapper.Map<List<WorkOrder>, List<WorkOrderVM>>(data);
+                return new Result<List<WorkOrderVM>>(true, ResultConstant.RecordFound, workOrderVm);
+            }
+            else
+                return new Result<List<WorkOrderVM>>(false, ResultConstant.RecordNotFound);
+        }
+
+        public Result<EmployeeVM> RemoveEmployee(string id)
+        {
+            var data = _unitOfWork.employeeRepository.Get(id);
+
+            if (data != null)
+            {
+                //data.Id = id;
+                //_unitOfWork.employeeRepository.Remove(data);
+               
+                data.IsActive = false;
+                _unitOfWork.employeeRepository.Update(data);
+
+                _unitOfWork.Save();
+                return new Result<EmployeeVM>(true, ResultConstant.RecordCreateSuccessfully);
+            }
+            else
+                return new Result<EmployeeVM>(false, ResultConstant.RecordCreateNotSuccessfully);
         }
 
 

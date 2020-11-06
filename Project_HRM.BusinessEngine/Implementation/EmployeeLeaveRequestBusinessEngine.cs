@@ -196,6 +196,27 @@ namespace Project_HRM.BusinessEngine.Implementation
                 return new Result<bool>(false, ResultConstant.RecordCreateNotSuccessfully);
         }
 
+        public Result<bool> ConfirmEmployeeLeaveRequest(int id)
+        {
+            var data = _unitOfWork.employeeLeaveRequestRepository.Get(id);
+            if (data != null)
+            {
+                try
+                {
+                    data.Approved = (int)EnumEmployeeLeaveRequestStatus.Approved;
+                    _unitOfWork.employeeLeaveRequestRepository.Update(data);
+                    _unitOfWork.Save();
+                    return new Result<bool>(true, ResultConstant.RecordCreateSuccessfully);
+                }
+                catch (Exception ex)
+                {
+                    return new Result<bool>(false, ex.Message.ToString());
+                }
+            }
+            else
+                return new Result<bool>(false, ResultConstant.RecordCreateNotSuccessfully);
+        }
+
 
         #endregion
     }

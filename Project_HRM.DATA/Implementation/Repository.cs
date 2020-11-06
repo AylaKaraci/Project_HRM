@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Project_HRM.DATA.Contracts;
 using Project_HRM.DATA.DataContext;
 using System;
@@ -12,7 +13,9 @@ namespace Project_HRM.DATA.Implementation
     public class Repository<T> : IRepositoryBase<T> where T : class, new()
     {
         private readonly ProjectContext _ctx;
+       
         internal DbSet<T> dbSet;
+       
 
         #region Constructor
         public Repository(ProjectContext ctx)
@@ -83,6 +86,12 @@ namespace Project_HRM.DATA.Implementation
         {
             dbSet.Remove(entity);
         }
+
+        public void Remove(string id)
+        {
+            //dbSet.Remove(id);
+        }
+
 
         public void Update(T entity)
         {

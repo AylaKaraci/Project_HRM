@@ -16,5 +16,6 @@ namespace Project_HRM.BusinessEngine.Contracts
         Result<EmployeeLeaveRequestVM> RemoveEmployeeRequest(int id);
         Result<List<EmployeeLeaveRequestVM>> GetSendApprovedLeaveRequests();//bu AssignControllerdan geldi. 
         Result<bool> RejectEmployeeLeaveRequest(int id);
+        Result<bool> ConfirmEmployeeLeaveRequest(int id);
     }
 }

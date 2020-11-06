@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Project_HRM.DATA.DbModels
@@ -18,7 +19,16 @@ namespace Project_HRM.DATA.DbModels
         public string MaritalStatus { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public DateTime? DateOfWork { get; set; }//işe giriş tarihi
+       
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }
+
+        public int EmployeeStatus { get; set; }
+
+
+        //public int EmployeeRequestId { get; set; }
+        //[ForeignKey("EmployeeRequestId")]
+        //public EmployeeLeaveRequest EmployeeLeaveRequest { get; set; }
+
     }
 }

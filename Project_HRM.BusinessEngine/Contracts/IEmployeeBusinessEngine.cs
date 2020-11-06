@@ -1,4 +1,5 @@
-﻿using Project_HRM.Common.ResultModels;
+﻿using Project_HRM.Common.ConstantsModels;
+using Project_HRM.Common.ResultModels;
 using Project_HRM.Common.VModels;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,12 @@ namespace Project_HRM.BusinessEngine.Contracts
         Result<EmployeeVM> EditEmployeeType(EmployeeVM model);
         Result<EmployeeVM> GetAllEditEmployee(string id);
         Result<List<EmployeeVM>> GetAllEmployee();//workorder edit işlemi için
+
+
+
+
+
+        Result<List<WorkOrderVM>> GetWorkOrderByEmployeeId(string employeeId, EnumWorkOrderStatus workOrderStatus);
+        Result<EmployeeVM> RemoveEmployee(string id);
     }
 }

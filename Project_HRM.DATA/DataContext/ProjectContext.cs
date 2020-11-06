@@ -20,6 +20,7 @@ namespace Project_HRM.DATA.DataContext
         public DbSet<EmployeeLeaveType> EmployeeLeaveTypes { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<WorkOrderStatus> WorkOrderStatus { get; set; }
+        public DbSet<EmployeeStatus> EmployeeStatus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,7 +30,8 @@ namespace Project_HRM.DATA.DataContext
 
             builder.Entity<Employee>()
                 .Property(e => e.IsAdmin)
-                .HasDefaultValue(false);
+                .HasDefaultValue(false);    
+
 
             base.OnModelCreating(builder);
         }

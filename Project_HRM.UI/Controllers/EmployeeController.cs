@@ -20,28 +20,37 @@ namespace Project_HRM.UI.Controllers
     {
        
         private readonly IEmployeeBusinessEngine _employeeBusinessEngine;
+        private readonly IEmployeeLeaveRequestBusinessEngine _employeeLeaveRequestBusinessEngine;
+
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public EmployeeController(IEmployeeBusinessEngine employeeBusinessEngine, IHostingEnvironment hostingEnvironment)
+        public EmployeeController(IEmployeeBusinessEngine employeeBusinessEngine, IHostingEnvironment hostingEnvironment, IEmployeeLeaveRequestBusinessEngine employeeLeaveRequestBusinessEngine)
         {
             
             _employeeBusinessEngine = employeeBusinessEngine;
             _hostingEnvironment = hostingEnvironment;
+            _employeeLeaveRequestBusinessEngine = employeeLeaveRequestBusinessEngine;
         }
 
         public IActionResult Index(string employeeId, int pageNumber = 1)
         {
+            
             if (!String.IsNullOrWhiteSpace(employeeId))
             {
                 var dataWithEmployee = _employeeBusinessEngine.GetNewByEmployeeId(employeeId);
-                var model = PaginatedList<EmployeeVM>.CreateAsync(dataWithEmployee.Data, pageNumber, 5);
+
+                var model = PaginatedList<EmployeeVM>.CreateAsync(dataWithEmployee.Data, pageNumber, 15);
+                
+
                 return View(model);
             }
 
             var data = _employeeBusinessEngine.GetAllNewEmployees();
+
+        
             if (data.IsSuccess)
             {
-                var model = PaginatedList<EmployeeVM>.CreateAsync(data.Data, pageNumber, 5);
+                var model = PaginatedList<EmployeeVM>.CreateAsync(data.Data, pageNumber, 15);
                 return View(model);
             }
             return View();
@@ -108,6 +117,36 @@ namespace Project_HRM.UI.Controllers
             if (data.IsSuccess)
                 return View(data.Data);
             return View();
+        }
+
+
+
+        [HttpDelete]
+        public IActionResult Delete(string id)
+        {
+
+            if (id == null)
+                return View();
+
+            var data = _employeeBusinessEngine.RemoveEmployee(id);
+            if (data.IsSuccess)
+                return View(data.Data);
+            return View();
+        
+
+
+
+            //if (id == null)
+            //    return Json(new { success = false, message = "Silmek için kayıt seçiniz..." });
+
+            //var data = _employeeBusinessEngine.RemoveEmployee(id);
+
+            //if (data.IsSuccess)
+            //    return Json(new { success = data.IsSuccess, message = data.Message });
+            //else
+            //    return Json(new { success = data.IsSuccess, message = data.Message });
+
+
         }
     }
 }

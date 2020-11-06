@@ -99,11 +99,23 @@ namespace Project_HRM.UI.Controllers
             if (id > 0)
             {
                 var data = _employeeLeaveRequestBusinessEngine.RejectEmployeeLeaveRequest((int)id);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "EmployeeLeaveAssign");
             }
             else
                 return View();
-        } 
+        }
+
+        public ActionResult Confirm(int id)
+        {
+            if (id > 0)
+            {
+                var data = _employeeLeaveRequestBusinessEngine.ConfirmEmployeeLeaveRequest((int)id);
+                return RedirectToAction("Index", "EmployeeLeaveAssign");
+            }
+            else
+                return View();
+        }
+
         #endregion
     }
 }

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Project_HRM.Common.VModels.EmployeeVM>
+﻿@model Project_HRM.Common.PaginatedListModels.PaginatedList<Project_HRM.Common.VModels.EmployeeVM>
+@*@model IEnumerable<Project_HRM.Common.VModels.EmployeeVM>*@
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,21 +16,21 @@
 </div>
 
 @*<div class="col-6 text-left text-white" style="margin-left:15px;">
-    <a class="btn btn-danger" asp-controller="Employee" asp-action="Create">Çalışan Ekle</a>
-</div>*@
+        <a class="btn btn-danger" asp-controller="Employee" asp-action="Create">Çalışan Ekle</a>
+    </div>*@
 <br />
-<div class="container" style="margin-left:100px;">
-    <div class="row">
-        <div class="col-xs-12">
-            <table id="simple-table" class="table  table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Adı</th>
-                        <th>Soyadı</th>
-                        <th>Departmanı</th>
+
+<div class="row" style="margin-left:5px;">
+    <div class="col-xs-12">
+        <table id="simple-table" class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    @*<th>Departmanı</th>
                         <th>Görevi</th>
-                        <th>Şubesi</th>
-                        @*<th>TcNo</th>
+                        <th>Subesi</th>*@
+                    @*<th>TcNo</th>
                         <th>Adres</th>
                         <th>Cinsiyet</th>
                         <th>Photo</th>
@@ -38,37 +40,45 @@
                         <th>İşe Başlangıç Tarihi</th>
                         <th>Email</th>
                         <th>CepNo</th>*@
-                        <th>İşlemler</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
+                    <th>Islemler</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+
+                    if (item.IsActive)
                     {
                         <tr>
-                            <td> @item.FirstName</td>
-                            <td>@item.LastName</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>                           
+                            @*<td></td>
+                                <td></td>
+                                <td></td>*@
                             @*<td>@item.TcNo</td>
-                            <td>@item.Address</td>
-                            <td>@item.Gender</td>
-                            <td>@item.PhotoPath</td>
-                            <td>@item.Document</td>*@
+                                <td>@item.Address</td>
+                                <td>@item.Gender</td>
+                                <td>@item.PhotoPath</td>
+                                <td>@item.Document</td>*@
                             @*<td>@item.MaritalStatus</td>*@
                             @*<td>@item.DateOfBirth.ToString()</td>
-                            <td>@item.DateOfWork.ToString()</td>
-                            <td>@item.Email</td>
-                            <td>@item.PhoneNumber</td>*@
+                                <td>@item.DateOfWork.ToString()</td>
+                                <td>@item.Email</td>
+                                <td>@item.PhoneNumber</td>*@
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
                                     <a class="btn btn-xs btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id">
 
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </a>
-                                    <a class="btn btn-xs btn-danger" id="btnRemove" data-id="@item.Id">
+                                    <a class="btn btn-xs btn-danger" id="btnRemove"
+                                       onclick="DeleteRow('@item.Id')" data-id="@item.Id">
                                         <i class="ace-icon fa fa-trash bigger-120"></i>
                                     </a>
+
+
+
 
                                     <a class="btn btn-xs btn-light" asp-controller="Employee" asp-action="Detail" asp-route-id="@item.Id">
 
@@ -78,56 +88,108 @@
                                         @*<i class="ace-icon fa fa-user bigger-120"></i>*@
                                     </a>
 
-
-
-
-
                                     @*<button class="btn btn-xs btn-warning">
-                                        <i class="ace-icon fa fa-flag bigger-120"></i>
-                                    </button>*@
+                                            <i class="ace-icon fa fa-flag bigger-120"></i>
+                                        </button>*@
                                 </div>
                             </td>
 
                         </tr>
                     }
-                </tbody>
-            </table>
-        </div><!-- /.span -->
-    </div>
+
+
+                }
+
+
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+</div>
+
+
+
+@{
+    var prevDisabled = !Model.PreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.NextPage ? "disabled" : "";
+}
+<div class="container" style="margin-left:10px;">
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex-1)"
+       class="btn btn-dark @prevDisabled">
+        <
+    </a>
+
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex+1)"
+       class="btn btn-default @nextDisabled">
+        >
+    </a>
 </div>
 
 @section Scripts{
+    <partial name="_ValidationScriptsPartial" />
 
     <script type="text/javascript">
+
+        function DeleteRow(rowId) {
+            //var id = $("#btnRemove").data("id");
+            var id = rowId;
+            swal({
+                title: 'Silmek İstediğinize Emin Misiniz?',
+                text: 'Silinen Data Geri Alınamaz!',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/Employee/Delete/" + id,
+                        success: function (data) {
+                            if (data.success) {
+                                toastr.success(data.message);
+                                location.reload();
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        }
+
+                    });
+                }
+            });
+        }
+
         $(document).ready(function () {
 
-            $("#btnRemove").on("click", function () {
-                var id = $("#btnRemove").data("id");
+            //$("#btnRemove").on("click", function () {
+            //    var id = $("#btnRemove").data("id");
 
-                swal({
-                    title: 'Silmek İstediğinize Emin Misiniz?',
-                    text: 'Silinen Data Geri Alınamaz!',
-                    icon: 'warning',
-                    buttons: true,
-                    dangerMode: true
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            type: "DELETE",
-                            url: "/Employees/Delete/" + id,
-                            success: function (data) {
-                                if (data.success) {
-                                    toastr.success(data.message);
-                                    location.reload();
-                                } else {
-                                    toastr.error(data.message);
-                                }
-                            }
+            //    swal({
+            //        title: 'Silmek İstediğinize Emin Misiniz?',
+            //        text: 'Silinen Data Geri Alınamaz!',
+            //        icon: 'warning',
+            //        buttons: true,
+            //        dangerMode: true
+            //    }).then((willDelete) => {
+            //        if (willDelete) {
+            //            $.ajax({
+            //                type: "DELETE",
+            //                url: "/Employee/Delete/" + id,
+            //                success: function (data) {
+            //                    if (data.success) {
+            //                        toastr.success(data.message);
+            //                        location.reload();
+            //                    } else {
+            //                        toastr.error(data.message);
+            //                    }
+            //                }
 
-                        });
-                    }
-                });
-            });
+            //            });
+            //        }
+            //    });
+            //});
+
+
         });
     </script>
 }

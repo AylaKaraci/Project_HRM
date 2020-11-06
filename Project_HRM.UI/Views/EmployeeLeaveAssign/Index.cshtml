@@ -45,9 +45,13 @@
                         {
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
-                                    <a class="btn btn-success" id="btnRequestAssign" data-id="@item.Id">Onayla</a>
+                                    @*<a class="btn btn-success" id="btnRequestAssign" data-id="@item.Id">Onayla</a>*@
 
-                                    <a asp-controller="EmployeeLeaveRequest" asp-action="Reject" asp-route-id="@item.Id" class="btn  btn-danger">
+                                    <a asp-controller="EmployeeLeaveRequest" asp-action="Confirm" asp-route-id="@item.Id" class="btn btn-success">
+                                        Onayla
+                                    </a>
+
+                                    <a asp-controller="EmployeeLeaveRequest" asp-action="Reject" asp-route-id="@item.Id" class="btn btn-danger">
                                         Reddet
                                     </a>
                                 </div>
@@ -61,40 +65,49 @@
     </div><!-- /.span -->
 </div>
 
-@section Scripts{
 
-     <script type="text/javascript">
-$(document).ready(function () {
-            $("#btnRequestAssign").on("click", function () {
-                var id = $("#btnRequestAssign").data("id");
 
-                swal({
-                    title: 'Onaylamak İstediğinize Emin Misiniz?',
-                    text: 'Onaylanan Data Geri Alınamaz!',
-                    icon: 'info',
-                    buttons: true,
-                    dangerMode: true
-                }).then((willEditing) => {
-                    if (willEditing) {
-                        $.ajax({
-                            type: "POST",
-                            url: "/EmployeeLeaveAssign/Approved/" + id,
-                            success: function (data) {
-                                if (data.success) {
-                                    toastr.success(data.message);
-                                    location.reload();
-                                } else {
-                                    toastr.error(data.message);
-                                }
-                            }
 
-                        });
-                    }
-                });
-            });
-        });</script>
 
-}
+@*@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+
+
+        //$(document).ready(function () {
+        //    $("#btnRequestAssign").on("click", function () {
+        //        var id = $("#btnRequestAssign").data("id");
+
+        //        swal({
+        //            title: 'Onaylamak İstediğinize Emin Misiniz?',
+        //            text: 'Onaylanan Data Geri Alınamaz!',
+        //            icon: 'info',
+        //            buttons: true,
+        //            dangerMode: true
+        //        }).then((willEditing) => {
+        //            if (willEditing) {
+        //                $.ajax({
+        //                    type: "POST",
+        //                    url: "/EmployeeLeaveAssign/Approved/" + id,
+        //                    success: function (data) {
+        //                        if (data.success) {
+        //                            toastr.success(data.message);
+        //                            location.reload();
+        //                        } else {
+        //                            toastr.error(data.message);
+        //                        }
+        //                    }
+
+        //                });
+        //            }
+        //        });
+        //    });
+        //});
+
+    </script>
+
+}*@
 
 
 

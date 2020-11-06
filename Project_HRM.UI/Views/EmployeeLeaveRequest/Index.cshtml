@@ -54,7 +54,8 @@
                                 <a class="btn btn-xs btn-info" asp-controller="EmployeeLeaveRequest" asp-action="Edit" asp-route-id="@item.Id">
                                     <i class="ace-icon fa fa-pencil bigger-120"></i>
                                 </a>
-                                <a class="btn btn-xs btn-danger" id="btnRemove" data-id="@item.Id">
+                                <a class="btn btn-xs btn-danger" id="btnRemove"
+                                   onclick="DeleteRow('@item.Id')" data-id="@item.Id">
                                     <i class="ace-icon fa fa-trash bigger-120"></i>
                                 </a>
                                 <button class="btn btn-xs btn-warning">
@@ -72,10 +73,9 @@
 @section Scripts{
 
     <script type="text/javascript">
-        $(document).ready(function () {
-
-            $("#btnRemove").on("click", function () {
-                var id = $("#btnRemove").data("id");
+        function DeleteRow(rowId) {
+            //var id = $("#btnRemove").data("id");
+            var id = rowId;
 
                 swal({
                     title: 'Silmek İstediğinize Emin Misiniz?',
@@ -100,7 +100,10 @@
                         });
                     }
                 });
-            });
+           
+        }
+
+        $(document).ready(function () {
         });
     </script>
 
