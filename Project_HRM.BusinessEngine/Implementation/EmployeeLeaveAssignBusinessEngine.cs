@@ -27,7 +27,7 @@ namespace Project_HRM.BusinessEngine.Implementation
 
         #endregion
 
-        #region CustomMethods
+        #region CustomMethods...bu değişiklik
 
         public Result<bool> ApprovedEmployeeRequest(int id)
         {
