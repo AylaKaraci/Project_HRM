@@ -50,7 +50,7 @@ namespace Project_HRM.UI.Controllers
         
             if (data.IsSuccess)
             {
-                var model = PaginatedList<EmployeeVM>.CreateAsync(data.Data, pageNumber, 15);
+                var model = PaginatedList<EmployeeVM>.CreateAsync(data.Data, pageNumber, 3);
                 return View(model);
             }
             return View();

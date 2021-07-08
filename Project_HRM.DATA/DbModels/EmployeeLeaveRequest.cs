@@ -7,7 +7,7 @@ namespace Project_HRM.DATA.DbModels
 {
     public class EmployeeLeaveRequest : BaseEntity
     {
-       
+
         //Talepte Bulunan Kullanıcı Bilgileri
         public string RequestingEmployeeId { get; set; } //employee nin tipi string di.
         [ForeignKey("RequestingEmployeeId")]
@@ -25,7 +25,6 @@ namespace Project_HRM.DATA.DbModels
         [ForeignKey("EmployeeLeaveTypeId")]
         public EmployeeLeaveType EmployeeLeaveType { get; set; }//bununla talepte bulunacağım.
 
-       
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime DateRequested { get; set; }

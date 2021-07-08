@@ -33,6 +33,7 @@ namespace Project_HRM.BusinessEngine.Implementation
 
         public Result<List<WorkOrderVM>> GetAllWorkOrders()
         {
+       
             var data = _unitOfWork.workOrderRepository.GetAll(includeProperties: "AssignEmployee").ToList();
 
             if (data != null)
@@ -40,6 +41,7 @@ namespace Project_HRM.BusinessEngine.Implementation
                 List<WorkOrderVM> returnData = new List<WorkOrderVM>();
                 foreach (var item in data)
                 {
+       
                     returnData.Add(new WorkOrderVM()
                     {
                         Id = item.Id,
@@ -51,8 +53,10 @@ namespace Project_HRM.BusinessEngine.Implementation
                         WorkOrderNumber = item.WorkOrderNumber,
                         WorkOrderPoint = item.WorkOrderPoint,
                         WorkOrderStatus = (EnumWorkOrderStatus)item.WorkOrderStatus,
-                        WorkOrderStatusText = EnumExtension<EnumWorkOrderStatus>.GetDisplayValue((EnumWorkOrderStatus)item.WorkOrderStatus)
-                    });
+                        WorkOrderStatusText = EnumExtension<EnumWorkOrderStatus>.GetDisplayValue((EnumWorkOrderStatus)item.WorkOrderStatus),
+                        
+
+                    }) ;
                 }
                 return new Result<List<WorkOrderVM>>(true, ResultConstant.RecordFound, returnData.OrderByDescending(x => x.CreateDate).ToList());
             }
@@ -62,7 +66,7 @@ namespace Project_HRM.BusinessEngine.Implementation
 
         public Result<WorkOrderVM> CreateWorkOrder(WorkOrderVM model, string uniqueFileName)
         {
-            if (model != null)
+            if (model != null )
             {
                 try
                 {

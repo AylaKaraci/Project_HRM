@@ -35,6 +35,9 @@ namespace Project_HRM.Common.VModels
 
         [ForeignKey("AssignEmployeeId")]
         public EmployeeVM AssignEmployee { get; set; }
+
+   
+        public EmployeeVM IsActive { get; set; }
         #endregion
     }
 }

@@ -46,7 +46,7 @@ namespace Project_HRM.BusinessEngine.Implementation
                         createModel.NumberOfDays = day < 0 ? -day : day;
                         createModel.Period = 1;
                         _unitOfWork.employeeAllocationRepository.Add(createModel);
-                        
+
                     }
 
                     data.Approved = (int)EnumEmployeeLeaveRequestStatus.Approved;

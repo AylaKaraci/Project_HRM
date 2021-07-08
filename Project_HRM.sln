@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_HRM.UI", "Project_HRM.UI\Project_HRM.UI.csproj", "{7119D265-F9FB-471F-BEE5-9E755FA40DA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_HRM.UI", "Project_HRM.UI\Project_HRM.UI.csproj", "{7119D265-F9FB-471F-BEE5-9E755FA40DA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_HRM.DATA", "Project_HRM.DATA\Project_HRM.DATA.csproj", "{B5BDA9EE-3D3E-43FF-8913-B45BEC9A2529}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_HRM.DATA", "Project_HRM.DATA\Project_HRM.DATA.csproj", "{B5BDA9EE-3D3E-43FF-8913-B45BEC9A2529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_HRM.BusinessEngine", "Project_HRM.BusinessEngine\Project_HRM.BusinessEngine.csproj", "{FF11A4F0-1D03-4CD2-AE0D-CA28F2CF7FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_HRM.BusinessEngine", "Project_HRM.BusinessEngine\Project_HRM.BusinessEngine.csproj", "{FF11A4F0-1D03-4CD2-AE0D-CA28F2CF7FB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_HRM.Common", "Project_HRM.Common\Project_HRM.Common.csproj", "{5614EC70-11E1-490C-A111-A8D99D795CE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_HRM.Common", "Project_HRM.Common\Project_HRM.Common.csproj", "{5614EC70-11E1-490C-A111-A8D99D795CE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2DFA7AE8-AC81-4DF3-9262-FC44CEFA7E15}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

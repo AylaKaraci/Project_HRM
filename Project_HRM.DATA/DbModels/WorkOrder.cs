@@ -28,6 +28,9 @@ namespace Project_HRM.DATA.DbModels
         public string AssignEmployeeId { get; set; } //kim tarafından atandı
         [ForeignKey("AssignEmployeeId")]
         public Employee AssignEmployee { get; set; }
+
+       
+        public Employee IsActive { get; set; }
         #endregion
     }
 }
